@@ -41,7 +41,7 @@ end
 Used a redirect after the player has entered their name from /names to /play route.
 
 
-In /play, there is a form for radio buttons so that the player can submit a weapon: rock, paper or scissors.
+Regarding the /play page, there is a form for radio buttons so that the player can submit a weapon: rock, paper or scissors.
 ```
 <form action="/result" method="get">
   <input type="radio" name="weapon" weapon="rock"> Rock<br>
