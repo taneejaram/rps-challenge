@@ -1,86 +1,53 @@
 # RPS Challenge
 
-Instructions
--------
-
-* Challenge time: rest of the day and weekend, until Monday 9am
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday morning
-
-Task
-----
-
-Knowing how to build web applications is getting us almost there as web developers!
-
-The Makers Academy Marketing Array ( **MAMA** ) have asked us to provide a game for them. Their daily grind is pretty tough and they need time to steam a little.
-
-Your task is to provide a _Rock, Paper, Scissors_ game for them so they can play on the web with the following user stories:
-
-```sh
-As a marketeer
-So that I can see my name in lights
-I would like to register my name before playing an online game
-
-As a marketeer
-So that I can enjoy myself away from the daily grind
-I would like to be able to play rock/paper/scissors
+Tested infrastructure to see that everything had been set up correctly and that the web page ran.
+```
+# feature 'Testing infrastructure' do
+#   scenario 'Check the app can run and check page content' do
+#     visit ('/')
+#     expect(page).to have_content 'Welcome player!'
+#   end
+# end
 ```
 
-Hints on functionality
-
-- the marketeer should be able to enter their name before the game
-- the marketeer will be presented the choices (rock, paper and scissors)
-- the marketeer can choose one option
-- the game will choose a random option
-- a winner will be declared
-
-
-As usual please start by
-
-* Forking this repo
-* TEST driving development of your app
-
-
-## Bonus level 1: Multiplayer
-
-Change the game so that two marketeers can play against each other ( _yes there are two of them_ ).
-
-## Bonus level 2: Rock, Paper, Scissors, Spock, Lizard
-
-Use the _special_ rules ( _you can find them here http://en.wikipedia.org/wiki/Rock-paper-scissors-lizard-Spock_ )
-
-## Basic Rules
-
-- Rock beats Scissors
-- Scissors beats Paper
-- Paper beats Rock
-
-In code review we'll be hoping to see:
-
-* All tests passing
-* High [Test coverage](https://github.com/makersacademy/course/blob/master/pills/test_coverage.md) (>95% is good)
-* The code is elegant: every class has a clear responsibility, methods are short etc.
-
-Reviewers will potentially be using this [code review rubric](docs/review.md).  Referring to this rubric in advance may make the challenge somewhat easier.  You should be the judge of how much challenge you want this weekend.
-
-Notes on test coverage
-----------------------
-
-Please ensure you have the following **AT THE TOP** of your spec_helper.rb in order to have test coverage stats generated
-on your pull request:
-
-```ruby
-require 'simplecov'
-require 'simplecov-console'
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::Console,
-  # Want a nice code coverage website? Uncomment this next line!
-  # SimpleCov::Formatter::HTMLFormatter
-])
-SimpleCov.start
+Created a form in index.erb so that the player can enter their name. This demonstrates how the controller and view interact.
+Controller.
+```
+get '/' do
+  erb :index
+end
+```
+View.
+```
+<h1>Register your name to start!</h1>
+<form action="/name" method="post">
+  <div>
+    <label for="name">Player:<br></label>
+    <input type="text" id="name" name="player_name">
+  <input type="submit" value="Submit">
+  </div>
+</form>
 ```
 
-You can see your test coverage when you run your tests. If you want this in a graphical form, uncomment the `HTMLFormatter` line and see what happens!
+Used sign_in_and_play and a web_helper_spec.rb to keep the code dry.
+```
+def sign_in_and_play
+  visit ('/')
+  fill_in 'player_name', with: 'Tan'
+  click_button 'Submit'
+end
+```
+
+Used a redirect after the player has entered their name from /names to /play route.
+
+
+In /play, there is a form for radio buttons so that the player can submit a weapon: rock, paper or scissors.
+```
+<form action="/result" method="get">
+  <input type="radio" name="weapon" weapon="rock"> Rock<br>
+  <input type="radio" name="weapon" weapon="paper"> Paper<br>
+  <input type="radio" name="weapon" weapon="scissors"> Scissors<br>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+```

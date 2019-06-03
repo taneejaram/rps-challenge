@@ -1,0 +1,13 @@
+<h2>Welcome to your Game of Rock, Paper, Scissors <%= @player_name%></h2>
+
+
+<h2>Please choose your weapon:</h2>
+
+<br>
+<form action="/result" method="get">
+  <input type="radio" name="weapon" weapon="rock"> Rock<br>
+  <input type="radio" name="weapon" weapon="paper"> Paper<br>
+  <input type="radio" name="weapon" weapon="scissors"> Scissors<br>
+  <br>
+  <input type="submit" value="Submit">
+</form>
